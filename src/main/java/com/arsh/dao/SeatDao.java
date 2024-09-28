@@ -12,10 +12,10 @@ import java.util.List;
 
 public class SeatDao {
 
-    // Find a row with enough available seats
+    // Find row with enough available seats
 	public List<Seat> findAvailableSeatsInRow(int numberOfSeats) {
 	    try (Session session = FactoryProvider.getFactory().openSession()) {
-	        // Modify the query to fetch the exact number of consecutive available seats
+	        //query to fetch the exact number of consecutive available seats
 	    	String hql = "SELECT s FROM Seat s " +
 	                "WHERE s.isBooked = false " +
 	                "AND s.rowNum IN ( " +
@@ -36,7 +36,7 @@ public class SeatDao {
 	}
 
 
-    // Find nearby available seats across rows
+    // find nearby  seats available across rows
     public List<Seat> findNearbyAvailableSeats(int numberOfSeats) {
         try (Session session = FactoryProvider.getFactory().openSession()) {
         	String hql = "FROM Seat WHERE isBooked = false ORDER BY rowNum, seatNumber";
@@ -46,7 +46,7 @@ public class SeatDao {
         }
     }
 
-    // Book the selected seats
+    // Booking the selected seats
     public void bookSeats(List<Seat> seats) {
         Transaction transaction = null;
         try (Session session = FactoryProvider.getFactory().openSession()) {
@@ -64,8 +64,7 @@ public class SeatDao {
         }
     }
 
-    // Display the seating arrangement
- // Display the seating arrangement
+    // Displaying the seating arrangement
     public List<Seat> getAllSeats() {
         try (Session session = FactoryProvider.getFactory().openSession()) {
             return session.createQuery("FROM Seat ORDER BY row_num, seatNumber", Seat.class).list();
