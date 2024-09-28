@@ -2,6 +2,7 @@ package com.arsh.entities;
 
 import javax.persistence.*;
 
+//this will create a table in my local database
 @Entity
 @Table(name = "seats")
 public class Seat {
@@ -19,7 +20,7 @@ public class Seat {
     @Column(name = "is_booked")
     private boolean isBooked;
 
-    // Getters and setters
+    // Getter and setter
 
     public int getSeatId() {
         return seatId;
