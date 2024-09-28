@@ -16,14 +16,14 @@ public class TrainReservationSystem {
 		Scanner scanner = new Scanner(System.in);
 
 		while (true) {
-			System.out.print("Enter the number of seats to reserve (1-7) or 0 to exit: ");
+			System.out.print("Enter the number of seats to be reserved (1-7) or 0 to exit: ");
 			int numberOfSeats = scanner.nextInt();
 
 			if (numberOfSeats == 0) {
-				System.out.println("Exiting the system...");
+				System.out.println("<----- Exiting the system... ---->");
 				break;
 			} else if (numberOfSeats < 1 || numberOfSeats > 7) {
-				System.out.println("You can only book between 1 and 7 seats. Try again.");
+				System.out.println("<------ You can only book between 1 and 7 seats. Try again. ------>");
 				continue;
 			}
 
@@ -35,18 +35,18 @@ public class TrainReservationSystem {
 				System.out.println("Not enough seats available. Please try a smaller number.");
 			}
 
-			// Display the seating arrangement after booking
+			// Displaying the seating arrangement after booking
 			reservationSystem.displaySeats();
 		}
 
 		scanner.close();
 	}
 
-	// Reserve seats based on user input
+	// Reserving seats based on user's input
 	public List<String> reserveSeats(int numberOfSeats) {
 		List<String> reservedSeats = new ArrayList<>();
 
-		// Step 1: Try to find a row with enough available seats
+		// Step 1: Try finding a row with enough available seats
 		List<Seat> availableSeats = seatDAO.findAvailableSeatsInRow(numberOfSeats);
 
 		if (!availableSeats.isEmpty()) {
@@ -56,7 +56,7 @@ public class TrainReservationSystem {
 			}
 		} else {
 			System.out.println("Not enough available seats in single row , booking nearby seats");
-			// Step 2: If no full row available, book nearby seats across rows
+			// Step 2: If no full row available, book nearby seats across row
 			availableSeats = seatDAO.findNearbyAvailableSeats(numberOfSeats);
 			if (availableSeats.size() == numberOfSeats) {
 				seatDAO.bookSeats(availableSeats);
@@ -73,7 +73,7 @@ public class TrainReservationSystem {
 		return reservedSeats;
 	}
 
-	// Display seating arrangement
+	// Displaying seating arrangement
 	public void displaySeats() {
 		List<Seat> seats = seatDAO.getAllSeats();
 
